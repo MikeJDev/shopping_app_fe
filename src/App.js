@@ -2,19 +2,28 @@ import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-// import dataUtility from './utilities/dataUtility';
+import dataUtility from './utilities/dataUtility';
+
+const api = axios.create({
+  baseUrl: 'http://localhost:3000/',
+})
 
 function App () {
+  const baseUrl = 'http://localhost:3000/'
+  const headers = {
+    'Access-Control-Allow-Origin': 'true',
+    'Content-Type': 'application/json',
+  }
   // const getData = async () => {
-  //   await dataUtility('get', '/')
+  //   await dataUtility('get', '/items', {})
   //     .then((res) => {
-  //       console.log('res:', res)
+  //       console.log('res:', res.data)
   //     })
   // }
-    axios.get('/')
-    .then((res) => {
-    console.log('res:', res)
-    })
+  axios.get(`${baseUrl}items`, headers)
+      .then((res) => {
+      console.log('res:', res.data)
+      })
     // useEffect(() => {
     //   getData()
     // }, [])

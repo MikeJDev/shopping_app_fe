@@ -3,13 +3,16 @@ import axios from 'axios';
 const data = async (method, url, payload) => {
   let axiosResult = null;
   try {
-    const headers = { ...axios.defaults.headers.common };
+    const headers = {
+      'Content-Type': 'application/json',
+    },
 
     axiosResult = await axios({
       url: `http://localhost:3000${url}`,
       method,
       headers,
-      data: payload ? JSON.stringify(payload) : {},
+      data: JSON.stringify(payload),
+      withCredentials: false,
     });
     console.log('axiosResult:', axiosResult)
     return axiosResult;
