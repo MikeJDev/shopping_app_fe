@@ -14,7 +14,6 @@ const data = async (method, url, payload) => {
       data: JSON.stringify(payload),
       withCredentials: false,
     });
-    console.log('axiosResult:', axiosResult)
     return axiosResult;
   } catch (error) {
     axiosResult = error.response;
