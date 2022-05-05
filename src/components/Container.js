@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+// MUI
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
+// custom
+import AddItemModal from './AddItemModal';
 
 function Container() {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box sx={{
       width: '100vw',
@@ -28,9 +41,16 @@ function Container() {
         <Button sx={{
           marginTop: '1rem',
         }}
-          variant="contained">Add your first item
+          variant="contained"
+          onClick={handleOpen}
+        >
+          Add your first item
         </Button>
       </Box>
+      <AddItemModal
+        open={open}
+        handleClose={handleClose}
+      />
     </Box>
   )
 }
