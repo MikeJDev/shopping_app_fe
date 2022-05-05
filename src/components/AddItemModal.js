@@ -8,8 +8,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
+
 //custom 
 import TextBox from './TextBox';
+import AutoCompleteField from './AutoCompleteField';
 
 export default function AddItemModal({
   open,
@@ -17,6 +19,13 @@ export default function AddItemModal({
 }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [quantityOptions] = useState([
+    { value: '1', label: '1' },
+    { value: '2', label: '2' },
+    { value: '3', label: '3' },
+    { value: '4', label: '4' },
+  ]);
 
 
   return (
@@ -49,6 +58,12 @@ export default function AddItemModal({
             setText={setDescription}
             multiline={true}
             value={description}
+            showCharacterCount
+          />
+          <AutoCompleteField
+            label={'How Many?'}
+            options={quantityOptions}
+            setValue={setQuantity}
           />
         </DialogContent>
         <DialogActions>
