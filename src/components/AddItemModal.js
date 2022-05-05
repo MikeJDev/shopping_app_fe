@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
+import dataUtility from '../utilities/dataUtility';
 
 //custom 
 import TextBox from './TextBox';
@@ -26,6 +27,21 @@ export default function AddItemModal({
     { value: '3', label: '3' },
     { value: '4', label: '4' },
   ]);
+
+  const saveItem = async () => {
+    const item = {
+      name,
+      description,
+      quantity,
+      isPurchased: false,
+    };
+    await dataUtility('post', '/items', item)
+      .then((res) => {
+      if (res.status === 200) {
+        handleClose();
+      }
+      });
+  }
 
 
   return (
@@ -68,7 +84,7 @@ export default function AddItemModal({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus variant="contained">
+          <Button onClick={saveItem} autoFocus variant="contained">
             Add Item
           </Button>
         </DialogActions>
