@@ -12,7 +12,6 @@ function ContainerToggle({
   isLoading,
 }) {
   const items = useSelector((state) => state.items.value); // get the value from the store
-  console.log('items:', items);
 
   return (
     <Box sx={{

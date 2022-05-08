@@ -35,6 +35,7 @@ export default function TextBox({
         sx={{
           width: '100%',
         }}
+        value={value}
       />
     </Box>
   );

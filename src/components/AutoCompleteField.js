@@ -6,6 +6,7 @@ export default function AutoCompleteField({
   options,
   label,
   setValue,
+  value,
 }) {
   const handleChange = (e, value) => {
     if (value) {
@@ -19,6 +20,7 @@ export default function AutoCompleteField({
       sx={{ width: '100%', }}
       onChange={handleChange}
       renderInput={(params) => <TextField {...params} label={label} />}
+      defaultValue={options.find((option) => option.value === value)}
     />
   );
 }
