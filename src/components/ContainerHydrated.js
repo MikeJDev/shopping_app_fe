@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 // custom
 import Item from './Item'
 import AddItemModal from './AddItemModal';
+import { Typography } from '@mui/material';
 
 export default function ContainerHydrated({
   items,
@@ -23,13 +24,24 @@ export default function ContainerHydrated({
   })
   
   return (
-    <Box>
-      <Button
-        variant="contained"
-        onClick={handleOpen}
-      >
-        Add Item
-      </Button>
+    <Box sx={{
+      width: '70vw',
+    }}>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: '5px',
+      }}>
+        <Typography>
+          Your Items
+        </Typography>
+        <Button
+          variant="contained"
+          onClick={handleOpen}
+          >
+          Add Item
+        </Button>
+      </Box>
       {itemsList}
 
       <AddItemModal
