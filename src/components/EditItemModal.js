@@ -8,6 +8,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import dataUtility from '../utilities/dataUtility';
 // redux
@@ -27,6 +30,8 @@ export default function EditItemModal({
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [isPurchased, setIsPurchased] = useState(false);
+  console.log('isPurchased:', isPurchased);
   const [quantityOptions] = useState([
     { value: '1', label: '1' },
     { value: '2', label: '2' },
@@ -34,12 +39,16 @@ export default function EditItemModal({
     { value: '4', label: '4' },
   ]);
 
+  const handleChecked = (e) => {
+    setIsPurchased(e.target.checked);
+  };
+
   const editItem = async () => {
     const editedItem = {
       name,
       description,
       quantity,
-      isPurchased: false,
+      isPurchased,
     };
     await dataUtility('put', `/${item.id}`, editedItem)
       .then((res) => {
@@ -48,21 +57,21 @@ export default function EditItemModal({
         handleClose();
       }
       });
-  }
+  };
 
   useEffect(() => {
     setName(item.name);
     setDescription(item.description);
     setQuantity(item.quantity);
+    setIsPurchased(item.isPurchased === 0 ? false : true);
     return () => {
       setName('');
       setDescription('');
       setQuantity('');
+      setIsPurchased(false);
     }
-  }, [])
+  }, [item]);
   
-
-
   return (
     <Box>
       <Dialog
@@ -107,11 +116,24 @@ export default function EditItemModal({
             setValue={setQuantity}
             value={quantity}
           />
+          <FormGroup>
+            <FormControlLabel control={(
+              <Checkbox
+                onClick={handleChecked}
+                size="small"
+                checked={isPurchased}
+              />
+            )}
+            sx={{
+              color: 'gray'
+            }}
+            label="Purchased" />
+          </FormGroup>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={editItem} autoFocus variant="contained">
-            Add Item
+            Save Item
           </Button>
         </DialogActions>
       </Dialog>

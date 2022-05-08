@@ -10,7 +10,6 @@ import DeleteItemModal from './DeleteItemModal';
 function Item({
   item,
 }) {
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -53,7 +52,6 @@ function Item({
           display: 'flex',
         }}>
           <Checkbox
-            {...label}
             onClick={handleChecked}
             size="small"
           />
