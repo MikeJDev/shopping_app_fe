@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   value: [],
+  reload: false,
 }
 
 export const itemSlice = createSlice({
@@ -11,10 +12,13 @@ export const itemSlice = createSlice({
     updateItems: (state, action) => {
       state.value = action.payload
     },
+    setReload: (state, action) => {
+      state.reload = action.payload
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateItems } = itemSlice.actions
+export const { updateItems, setReload } = itemSlice.actions
 
 export default itemSlice.reducer

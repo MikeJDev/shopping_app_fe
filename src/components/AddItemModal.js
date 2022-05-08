@@ -1,4 +1,5 @@
 import  React, { useState } from 'react';
+// MUI
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,17 +8,20 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-
+// utils
 import dataUtility from '../utilities/dataUtility';
-
 //custom 
 import TextBox from './TextBox';
 import AutoCompleteField from './AutoCompleteField';
+// redux
+import { useDispatch } from 'react-redux'
+import { setReload } from '../redux/itemSlice';
 
 export default function AddItemModal({
   open,
   handleClose,
 }) {
+  const dispatch = useDispatch(); // for dispatching actions
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -38,6 +42,7 @@ export default function AddItemModal({
     await dataUtility('post', '/items', item)
       .then((res) => {
       if (res.status === 200) {
+        dispatch(setReload(true)); // set reload to true
         handleClose();
       }
       });

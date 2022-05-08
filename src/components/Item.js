@@ -15,6 +15,10 @@ function Item({
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
+  const handleChecked = (e) => {
+    setChecked(e.target.checked);
+  };
+
   const handleOpenEdit = () => {
     setOpenEdit(true);
   };
@@ -30,10 +34,6 @@ function Item({
   const handleCloseDelete = () => {
     setOpenDelete(false);
   };
-
-  const handleChecked = (e) => {
-    setChecked(e.target.checked);
-  }
 
   return (
     <>
