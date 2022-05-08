@@ -1,22 +1,34 @@
 import React, { useState } from 'react'
+// MUI
 import { Box } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import { Typography, IconButton} from '@mui/material';
+// custom
 import EditItemModal from './EditItemModal';
+import DeleteItemModal from './DeleteItemModal';
 
 function Item({
   item,
 }) {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [checked, setChecked] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenEdit = () => {
+    setOpenEdit(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleOpenDelete = () => {
+    setOpenDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
   };
 
   const handleChecked = (e) => {
@@ -27,13 +39,14 @@ function Item({
     <>
       <Box sx={{
         border: '1px solid grey',
-        height: '5rem',
+        height: '7rem',
         marginBottom: '1rem',
-        borderRadius: '3px',
+        borderRadius: '5px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: checked ? '#f5f5f5' : '#fff',
+        padding: '0 1rem',
       }}>
 
         <Box sx={{ // left side
@@ -66,18 +79,23 @@ function Item({
         </Box>
 
         <Box> {/* right side */}
-          <IconButton  onClick={handleOpen}>
+          <IconButton  onClick={handleOpenEdit}>
             <div className="material-icons">edit</div>
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleOpenDelete}>
             <div className="material-icons">delete</div>
           </IconButton>
         </Box>
       </Box>
       <EditItemModal
-        open={open}
-        handleClose={handleClose}
+        open={openEdit}
+        handleClose={handleCloseEdit}
         item={item}
+      />
+      <DeleteItemModal
+        open={openDelete}
+        handleClose={handleCloseDelete}
+        id={item.id}
       />
     </>
   )
