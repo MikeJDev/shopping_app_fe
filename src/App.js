@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {  useDispatch } from 'react-redux'
-import { updateItems } from './redux/itemSlice';
+// redux
+import {  useDispatch, useSelector } from 'react-redux'
+import { updateItems, setReload } from './redux/itemSlice';
 // MUI
 import { Box } from '@mui/system';
 // utils
@@ -8,19 +9,11 @@ import dataUtility from './utilities/dataUtility';
 // custom
 import AppBarDisplay from './components/AppBarDisplay';
 import ContainerToggle from './components/ContainerToggle';
-// import { ThemeProvider, createMuiTheme } from '@material-ui/core';
-
-// const theme = createMuiTheme({
-//   typography: {
-//     fontFamily: [
-//       'Chilanka',
-//       'cursive',
-//     ].join(','),
-//   },});
 
 function App () {
   const dispatch = useDispatch(); // for dispatching actions
-  const [isLoading, setIsLoading] = useState(true); // for loading indicator
+  const [isLoading, setIsLoading] = useState(false); // for loading indicator
+  const reload = useSelector(state => state.items.reload); // for refreshing state
 
   const getItems = async () => { 
     await dataUtility('get', '/items')
@@ -28,6 +21,7 @@ function App () {
         if (res.status === 200) { 
           dispatch(updateItems(res.data.data)); // dispatch action to update items
           setIsLoading(false); // set loading indicator to false
+          dispatch(setReload(false)); // set reload to false
         } else {
           console.log('error')
           // display error
@@ -36,8 +30,8 @@ function App () {
     };
 
   useEffect(() => {
-    getItems(); // get items on mount
-  }, []); // empty array to only run once
+      getItems(); // get items on mount
+  }, [reload]);
 
   return (
     // <ThemeProvider theme={theme}>
