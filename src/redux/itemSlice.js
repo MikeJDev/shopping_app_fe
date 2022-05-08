@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  items: 0,
+  value: [],
 }
 
 export const itemSlice = createSlice({
@@ -9,7 +9,7 @@ export const itemSlice = createSlice({
   initialState,
   reducers: {
     updateItems: (state, action) => {
-      state.items = action.payload
+      state.value = action.payload
     },
   },
 })
