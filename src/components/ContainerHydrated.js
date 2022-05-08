@@ -32,7 +32,9 @@ export default function ContainerHydrated({
         justifyContent: 'space-between',
         marginBottom: '5px',
       }}>
-        <Typography>
+        <Typography sx={{
+          
+        }}>
           Your Items
         </Typography>
         <Button
