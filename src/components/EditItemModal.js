@@ -31,8 +31,7 @@ export default function EditItemModal({
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
   const [isPurchased, setIsPurchased] = useState(false);
-  console.log('isPurchased:', isPurchased);
-  const [quantityOptions] = useState([
+  const [quantityOptions] = useState([ // these shoul come from DB table, so no deployment is needed to change
     { value: '1', label: '1' },
     { value: '2', label: '2' },
     { value: '3', label: '3' },
