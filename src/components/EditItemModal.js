@@ -1,4 +1,4 @@
-import  React, { useState } from 'react';
+import  React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -14,9 +14,10 @@ import dataUtility from '../utilities/dataUtility';
 import TextBox from './TextBox';
 import AutoCompleteField from './AutoCompleteField';
 
-export default function AddItemModal({
+export default function EditItemModal({
   open,
   handleClose,
+  item,
 }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -28,20 +29,32 @@ export default function AddItemModal({
     { value: '4', label: '4' },
   ]);
 
-  const saveItem = async () => {
-    const item = {
+  const editItem = async () => {
+    const editedItem = {
       name,
       description,
       quantity,
       isPurchased: false,
     };
-    await dataUtility('post', '/items', item)
+    await dataUtility('put', `/${item.id}`, editedItem)
       .then((res) => {
       if (res.status === 200) {
         handleClose();
       }
       });
   }
+
+  useEffect(() => {
+    setName(item.name);
+    setDescription(item.description);
+    setQuantity(item.quantity);
+    return () => {
+      setName('');
+      setDescription('');
+      setQuantity('');
+    }
+  }, [])
+  
 
 
   return (
@@ -50,7 +63,6 @@ export default function AddItemModal({
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        maxWidth="lg"
       >
         <DialogTitle id="alert-dialog-title">
           {"SHOPPING LIST"}
@@ -61,15 +73,20 @@ export default function AddItemModal({
           <Typography sx={{
             fontSize: '1.2rem',
           }}>
-            Add an item
+            Edit an item
           </Typography>
-          <DialogContentText id="alert-dialog-description">
-            Add your new item below
+          <DialogContentText
+            id="alert-dialog-description"
+            sx={{
+              marginBottom: '1rem',
+            }}>
+            Edit your item below
           </DialogContentText>
           <TextBox
             label="Item Name"
             setText={setName}
             multiline={false}
+            value={name}
           />
           <TextBox
             label="Description"
@@ -82,11 +99,12 @@ export default function AddItemModal({
             label={'How Many?'}
             options={quantityOptions}
             setValue={setQuantity}
+            value={quantity}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={saveItem} autoFocus variant="contained">
+          <Button onClick={editItem} autoFocus variant="contained">
             Add Item
           </Button>
         </DialogActions>
