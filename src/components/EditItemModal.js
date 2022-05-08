@@ -1,14 +1,18 @@
 import  React, { useState, useEffect } from 'react';
+// MUI
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import dataUtility from '../utilities/dataUtility';
+// redux
+import { useDispatch } from 'react-redux'
+import { setReload } from '../redux/itemSlice';
 
 //custom 
 import TextBox from './TextBox';
@@ -19,6 +23,7 @@ export default function EditItemModal({
   handleClose,
   item,
 }) {
+  const dispatch = useDispatch(); // for dispatching actions
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -39,6 +44,7 @@ export default function EditItemModal({
     await dataUtility('put', `/${item.id}`, editedItem)
       .then((res) => {
       if (res.status === 200) {
+        dispatch(setReload(true)); // set reload to true
         handleClose();
       }
       });

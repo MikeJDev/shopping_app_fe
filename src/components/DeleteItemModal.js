@@ -1,4 +1,5 @@
-import  React, { useState, useEffect } from 'react';
+import  React from 'react';
+// MUI
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -6,22 +7,25 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
-
+// utils
 import dataUtility from '../utilities/dataUtility';
+// redux
+import { useDispatch } from 'react-redux'
+import { setReload } from '../redux/itemSlice';
 
-//custom 
 
 export default function DeleteItemModal({
   open,
   handleClose,
   id,
 }) {
+  const dispatch = useDispatch(); // for dispatching actions
 
   const deleteItem = async () => {
     await dataUtility('delete', `/${id}`)
       .then((res) => {
-      console.log('res:', res);
       if (res.status === 200) {
+        dispatch(setReload(true)); // set reload to true
         handleClose();
       }
       });
