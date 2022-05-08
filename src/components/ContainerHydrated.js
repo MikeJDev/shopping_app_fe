@@ -25,7 +25,7 @@ export default function ContainerHydrated({
   
   return (
     <Box sx={{
-      width: '70vw',
+      width: '80vw',
     }}>
       <Box sx={{
         display: 'flex',
