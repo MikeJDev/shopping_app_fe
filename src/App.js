@@ -8,6 +8,15 @@ import dataUtility from './utilities/dataUtility';
 // custom
 import AppBarDisplay from './components/AppBarDisplay';
 import ContainerToggle from './components/ContainerToggle';
+// import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+
+// const theme = createMuiTheme({
+//   typography: {
+//     fontFamily: [
+//       'Chilanka',
+//       'cursive',
+//     ].join(','),
+//   },});
 
 function App () {
   const dispatch = useDispatch(); // for dispatching actions
@@ -31,12 +40,15 @@ function App () {
   }, []); // empty array to only run once
 
   return (
-    <Box>
-      <AppBarDisplay />
-      <ContainerToggle
-        isLoading={isLoading}
-      />
-    </Box>
+    // <ThemeProvider theme={theme}>
+      <Box>
+        <AppBarDisplay />
+        <ContainerToggle
+          isLoading={isLoading}
+        />
+      </Box>
+    // </ThemeProvider>
+
   );
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import { Typography } from '@mui/material';
@@ -8,9 +8,10 @@ function Item({
   item,
 }) {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const [checked, setChecked] = useState(false);
 
   const handleChecked = (e) => {
-    console.log('checked', e.target.checked);
+    setChecked(e.target.checked);
   }
 
   return (
@@ -25,6 +26,7 @@ function Item({
       <Checkbox
         {...label}
         onClick={handleChecked}
+        size="small"
       />
       <Box sx={{
         display: 'flex',
@@ -33,10 +35,15 @@ function Item({
         <Typography sx={{
           fontSize: '1rem',
           fontWeight: 'bold',
+          textDecoration: checked ? 'line-through' : 'none',
         }}>
           {item.name}
         </Typography>
-        <Typography>
+        <Typography sx={{
+          fontSize: '0.8rem',
+          color: 'gray',
+          textDecoration: checked ? 'line-through' : 'none',
+        }}>
           {item.description}
         </Typography>
       </Box>

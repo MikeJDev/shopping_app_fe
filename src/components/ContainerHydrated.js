@@ -30,10 +30,10 @@ export default function ContainerHydrated({
       <Box sx={{
         display: 'flex',
         justifyContent: 'space-between',
-        marginBottom: '5px',
+        marginBottom: '10px',
       }}>
         <Typography sx={{
-          
+          fontSize: '1.5rem',
         }}>
           Your Items
         </Typography>
