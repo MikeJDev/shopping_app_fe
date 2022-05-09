@@ -34,10 +34,10 @@ export default function EditItemModal({
   const [nameError, setNameError] = useState(false);
   const [quantityError, setQuantityError] = useState(false);
   const [quantityOptions] = useState([ // these shoul come from DB table, so no deployment is needed to change
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
   ]);
 
   const handleSnackbar = (snack) => {

@@ -63,9 +63,9 @@ function Item({
               fontWeight: 'bold',
               textDecoration: checked ? 'line-through' : 'none',
             }}>
-              {item.name}
+              {`${item.name} (${item.quantity})`}
             </Typography>
-            <Typography sx={{ // 
+            <Typography sx={{ // description
               fontSize: '.9rem',
               fontWeight: 'bold',
               color: 'gray',

@@ -10,11 +10,11 @@ export default function AutoCompleteField({
   error,
   helperText,
 }) {
-  console.log('error:', error)
-  console.log('helperText:', helperText)
   const handleChange = (e, value) => {
     if (value) {
       setValue(value.value);
+    } else {
+      setValue(0);
     }
   }
   return (
@@ -31,7 +31,7 @@ export default function AutoCompleteField({
         helperText={helperText} 
       />
       }
-      defaultValue={options.find((option) => option.value === value)}
+      value={options.find((option) => option.value === value)}
     />
   );
 }
