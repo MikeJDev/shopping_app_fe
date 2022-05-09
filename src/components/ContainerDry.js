@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
 // custom
 import AddItemModal from './AddItemModal';
+import { Typography } from '@mui/material';
 
 export default function ContainerDry() {
 
@@ -29,7 +30,7 @@ export default function ContainerDry() {
         display: 'flex',
         flexDirection: 'column',
       }}>
-        Your shopping list is empty :
+          Your shopping list is empty :&#40;
         <Button sx={{
           marginTop: '1rem',
         }}

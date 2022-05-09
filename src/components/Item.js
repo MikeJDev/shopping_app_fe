@@ -60,14 +60,14 @@ function Item({
             flexDirection: 'column',
           }}>
             <Typography sx={{ // title
-              fontSize: '1rem',
               fontWeight: 'bold',
               textDecoration: checked ? 'line-through' : 'none',
             }}>
               {item.name}
             </Typography>
             <Typography sx={{ // 
-              fontSize: '0.8rem',
+              fontSize: '.9rem',
+              fontWeight: 'bold',
               color: 'gray',
               textDecoration: checked ? 'line-through' : 'none',
             }}>
@@ -80,7 +80,7 @@ function Item({
           <IconButton  onClick={handleOpenEdit}>
             <div className="material-icons">edit</div>
           </IconButton>
-          <IconButton onClick={handleOpenDelete}>
+          <IconButton onClick={handleOpenDelete} disabled={!checked}>
             <div className="material-icons">delete</div>
           </IconButton>
         </Box>
