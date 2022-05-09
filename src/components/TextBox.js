@@ -8,6 +8,8 @@ export default function TextBox({
   multiline,
   value,
   showCharacterCount,
+  error,
+  helperText
 }) {
   const handleChange = (e) => {
     setText(e.target.value);
@@ -30,12 +32,13 @@ export default function TextBox({
         maxRows={multiline ? 5 : 1}
         rows={multiline ? 5 : 1}
         inputProps={{ maxLength: 100 }}
-        helperText={showCharacterCount ? `${value?.length} / 100` : null}
+        helperText={showCharacterCount ? `${value?.length} / 100` : helperText}
         onChange={handleChange}
         sx={{
           width: '100%',
         }}
         value={value}
+        error={error}
       />
     </Box>
   );

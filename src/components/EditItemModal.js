@@ -15,7 +15,7 @@ import Checkbox from '@mui/material/Checkbox';
 import dataUtility from '../utilities/dataUtility';
 // redux
 import { useDispatch } from 'react-redux'
-import { setReload } from '../redux/itemSlice';
+import { setReload, setSnackbar } from '../redux/itemSlice';
 
 //custom 
 import TextBox from './TextBox';
@@ -31,6 +31,8 @@ export default function EditItemModal({
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
   const [isPurchased, setIsPurchased] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [quantityError, setQuantityError] = useState(false);
   const [quantityOptions] = useState([ // these shoul come from DB table, so no deployment is needed to change
     { value: '1', label: '1' },
     { value: '2', label: '2' },
@@ -38,11 +40,38 @@ export default function EditItemModal({
     { value: '4', label: '4' },
   ]);
 
+  const handleSnackbar = (snack) => {
+    dispatch(setSnackbar(snack));
+  };
+
   const handleChecked = (e) => {
     setIsPurchased(e.target.checked);
   };
 
+  const validate = () => {
+    // validate name and quantity are not empty
+    setNameError(false);
+    setQuantityError(false);
+    if (name === '') {
+      setNameError(true);
+      return true;
+    } else if (quantity === 0) {
+      setQuantityError(true);
+      return true;
+  }
+  return false;
+  }
+
   const editItem = async () => {
+    const isValid = validate();
+    if (isValid) {
+      handleSnackbar({
+        open: true,
+        action: 'warning',
+        message: 'Please fill in required fields',
+      });
+      return;
+    }
     const editedItem = {
       name,
       description,
@@ -101,6 +130,8 @@ export default function EditItemModal({
             setText={setName}
             multiline={false}
             value={name}
+            error={nameError}
+            helperText={nameError ? 'Please enter a name' : null}
           />
           <TextBox
             label="Description"
@@ -114,6 +145,8 @@ export default function EditItemModal({
             options={quantityOptions}
             setValue={setQuantity}
             value={quantity}
+            helperText={quantityError ? 'Please enter a quantity' : null}
+            error={quantityError}
           />
           <FormGroup>
             <FormControlLabel control={(
