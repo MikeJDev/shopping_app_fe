@@ -1,4 +1,6 @@
 # Shopping App
+## What is it?
+This is a shopping app. It is a simple app that allows you to add items to your shopping list and then view them. It is also able to remove items from your shopping list or edit individual items. Editing an item will allow you to change the name, quantity, description, and purchased status of the item. The app is currently in beta and is subject to change.
 
 ## Available Scripts
 
