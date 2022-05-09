@@ -15,7 +15,7 @@ import TextBox from './TextBox';
 import AutoCompleteField from './AutoCompleteField';
 // redux
 import { useDispatch } from 'react-redux'
-import { setReload } from '../redux/itemSlice';
+import { setReload, setSnackbar } from '../redux/itemSlice';
 
 export default function AddItemModal({
   open,
@@ -24,15 +24,45 @@ export default function AddItemModal({
   const dispatch = useDispatch(); // for dispatching actions
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [quantity, setQuantity] = useState(0);
+  const [nameError, setNameError] = useState(false);
+  const [quantityError, setQuantityError] = useState(false);
   const [quantityOptions] = useState([
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
   ]);
 
+  const handleSnackbar = (snack) => {
+    dispatch(setSnackbar(snack));
+  };
+
+  const validate = () => {
+    // validate name and quantity are not empty
+    setNameError(false);
+    setQuantityError(false);
+    if (name === '') {
+      setNameError(true);
+      return true;
+    } else if (quantity === 0) {
+      setQuantityError(true);
+      return true;
+  }
+  return false;
+  }
+
+
   const saveItem = async () => {
+    const isValid = validate();
+    if (isValid) {
+      handleSnackbar({
+        open: true,
+        action: 'warning',
+        message: 'Please fill in required fields',
+      });
+      return;
+    }
     const item = {
       name,
       description,
@@ -44,6 +74,14 @@ export default function AddItemModal({
       if (res.status === 200) {
         dispatch(setReload(true)); // set reload to true
         handleClose();
+      } else {
+        if (res.status === 500) {
+          handleSnackbar({
+            open: true,
+            action: 'error',
+            message: 'Unable to save item, please try again later.',
+          });
+        }
       }
       });
   }
@@ -55,7 +93,7 @@ export default function AddItemModal({
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        maxWidth="lg"
+        // maxWidth="lg"
       >
         <DialogTitle id="alert-dialog-title">
           {"SHOPPING LIST"}
@@ -68,13 +106,17 @@ export default function AddItemModal({
           }}>
             Add an item
           </Typography>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" sx={{
+            marginBottom: '1rem',
+          }}>
             Add your new item below
           </DialogContentText>
           <TextBox
             label="Item Name"
             setText={setName}
             multiline={false}
+            error={nameError}
+            helperText={nameError ? 'Please enter a name' : null}
           />
           <TextBox
             label="Description"
@@ -87,6 +129,8 @@ export default function AddItemModal({
             label={'How Many?'}
             options={quantityOptions}
             setValue={setQuantity}
+            helperText={quantityError ? 'Please enter a quantity' : null}
+            error={quantityError}
           />
         </DialogContent>
         <DialogActions>

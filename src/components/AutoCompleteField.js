@@ -7,7 +7,11 @@ export default function AutoCompleteField({
   label,
   setValue,
   value,
+  error,
+  helperText,
 }) {
+  console.log('error:', error)
+  console.log('helperText:', helperText)
   const handleChange = (e, value) => {
     if (value) {
       setValue(value.value);
@@ -19,7 +23,14 @@ export default function AutoCompleteField({
       options={options || []}
       sx={{ width: '100%', }}
       onChange={handleChange}
-      renderInput={(params) => <TextField {...params} label={label} />}
+      renderInput={(params) => 
+      <TextField
+        {...params}
+        label={label}
+        error={error}
+        helperText={helperText} 
+      />
+      }
       defaultValue={options.find((option) => option.value === value)}
     />
   );
