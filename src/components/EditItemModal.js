@@ -83,6 +83,12 @@ export default function EditItemModal({
       if (res.status === 200) {
         dispatch(setReload(true)); // set reload to true
         handleClose();
+      } else if (res.status === 500) {
+        handleSnackbar({
+          open: true,
+          action: 'error',
+          message: 'Unable to update item, please refresh and try again later.',
+        });
       }
       });
   };

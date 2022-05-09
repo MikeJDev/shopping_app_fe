@@ -79,7 +79,7 @@ export default function AddItemModal({
           handleSnackbar({
             open: true,
             action: 'error',
-            message: 'Unable to save item, please try again later.',
+            message: 'Unable to save item, please refresh and try again later.',
           });
         }
       }

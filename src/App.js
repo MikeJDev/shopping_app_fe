@@ -82,10 +82,8 @@ function App () {
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}
-        // onClose={handleClose}
+        onClose={handleCloseSnackbar}
         anchorOrigin={snackbar.anchorOrigin}
-        // message={snackbar.message}
-        // action="error"
       >
         <Alert severity={snackbar.action} onClose={handleCloseSnackbar}>
           {snackbar.message}
