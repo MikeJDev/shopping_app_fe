@@ -4,11 +4,32 @@ import {  useDispatch, useSelector } from 'react-redux'
 import { updateItems, setReload } from './redux/itemSlice';
 // MUI
 import { Box } from '@mui/system';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
 // utils
 import dataUtility from './utilities/dataUtility';
 // custom
 import AppBarDisplay from './components/AppBarDisplay';
 import ContainerToggle from './components/ContainerToggle';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Dosis, Nunito, sans-serif',
+    fontSize: 17,
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'Dosis';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 400;
+      `,
+    },
+  },
+});
 
 function App () {
   const dispatch = useDispatch(); // for dispatching actions
@@ -34,14 +55,17 @@ function App () {
   }, [reload]);
 
   return (
-    // <ThemeProvider theme={theme}>
-      <Box>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{
+        backgroundColor: '#fafafa',
+      }}>
         <AppBarDisplay />
         <ContainerToggle
           isLoading={isLoading}
         />
       </Box>
-    // </ThemeProvider>
+    </ThemeProvider>
 
   );
 }

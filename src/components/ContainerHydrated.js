@@ -25,7 +25,7 @@ export default function ContainerHydrated({
   
   return (
     <Box sx={{
-      width: '80vw',
+      width: '70vw',
     }}>
       <Box sx={{
         display: 'flex',
@@ -38,6 +38,7 @@ export default function ContainerHydrated({
           Your Items
         </Typography>
         <Button
+          size="small"
           variant="contained"
           onClick={handleOpen}
           >
