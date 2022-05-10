@@ -2,7 +2,7 @@
 
 ### `git clone https://github.com/MikeJDev/shopping_app_fe.git`
 ## What is it?
-This is a shopping app. It is a simple app that allows you to add items to your shopping list and then view them. It is also able to remove items from your shopping list or edit individual items. Editing an item will allow you to change the name, quantity, description, and purchased status of the item. The app is currently in beta and is subject to change.
+This is a shopping app. It is a simple responsive app that allows you to add items to your shopping list and then view them. It is also able to remove items from your shopping list or edit individual items. Editing an item will allow you to change the name, quantity, description, and purchased status of the item. The app is currently in beta and is subject to change.
 
 ## Dependencies
 The app requires the following dependencies:
