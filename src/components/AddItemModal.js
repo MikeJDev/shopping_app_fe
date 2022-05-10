@@ -93,7 +93,14 @@ export default function AddItemModal({
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        // maxWidth="lg"
+        sx={{
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: "100%",
+              maxWidth: "500px",
+            },
+          },
+        }}
       >
         <DialogTitle id="alert-dialog-title">
           {"SHOPPING LIST"}
