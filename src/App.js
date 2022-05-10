@@ -18,7 +18,7 @@ import ContainerToggle from './components/ContainerToggle';
 const theme = createTheme({
   typography: {
     fontFamily: 'Dosis, Nunito, sans-serif',
-    fontSize: 17,
+    fontSize: {lg: 17, md: 15, sm: 13, xs: 11},
   },
   components: {
     MuiCssBaseline: {

@@ -17,7 +17,7 @@ export default function TextBox({
   return (
     <Box
       sx={{
-        width: '25vw',
+        width: {lg: '25vw', xs: '100%'},
         maxWidth: '100%',
         marginBottom: '1rem',
       }}

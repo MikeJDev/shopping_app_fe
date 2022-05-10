@@ -99,7 +99,7 @@ export default function AddItemModal({
           {"SHOPPING LIST"}
         </DialogTitle>
         <DialogContent sx={{
-          marginBottom: '10rem',
+          marginBottom: {lg: '10rem', xs: '2rem'},
         }}>
           <Typography sx={{
             fontSize: '1.2rem',
